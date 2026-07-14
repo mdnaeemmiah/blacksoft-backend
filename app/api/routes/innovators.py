@@ -1,8 +1,9 @@
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status
 
 from app.db.mongodb import get_db
 from app.models.common import as_object_id, stringify_object_id
 from app.schemas.innovator import InnovatorCreate, InnovatorResponse, InnovatorUpdate
+from app.core.security import require_dashboard_user
 
 router = APIRouter(prefix="/innovators", tags=["Trusted Innovators"])
 
@@ -16,7 +17,7 @@ async def list_innovators():
     return items
 
 
-@router.post("", response_model=InnovatorResponse, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=InnovatorResponse, status_code=status.HTTP_201_CREATED, dependencies=[Depends(require_dashboard_user)])
 async def create_innovator(payload: InnovatorCreate):
     db = get_db()
     result = await db.innovators.insert_one(payload.model_dump())
@@ -26,7 +27,7 @@ async def create_innovator(payload: InnovatorCreate):
     return stringify_object_id(document)
 
 
-@router.put("/{innovator_id}", response_model=InnovatorResponse)
+@router.put("/{innovator_id}", response_model=InnovatorResponse, dependencies=[Depends(require_dashboard_user)])
 async def update_innovator(innovator_id: str, payload: InnovatorUpdate):
     db = get_db()
     try:
@@ -51,7 +52,7 @@ async def update_innovator(innovator_id: str, payload: InnovatorUpdate):
     return stringify_object_id(document)
 
 
-@router.delete("/{innovator_id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/{innovator_id}", status_code=status.HTTP_204_NO_CONTENT, dependencies=[Depends(require_dashboard_user)])
 async def delete_innovator(innovator_id: str):
     db = get_db()
     try:

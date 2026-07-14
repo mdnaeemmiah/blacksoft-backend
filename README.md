@@ -29,16 +29,20 @@ The public frontend runs on port 3000 and the standalone dashboard runs on
 port 3001. Both use `http://localhost:8000/api`; configure their respective
 `.env` files from `.env.example` when using a different API host.
 
+Dashboard access requires `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `JWT_SECRET`, and
+working SMTP settings. Login first verifies the password, then sends a
+single-use email code before issuing an expiring JWT session token. Password
+reset uses the same SMTP code flow.
+
 ## Docker
 
-From the repository root, copy `.env.example` to `.env` and run:
+Build and run the API image from this directory. Provide the environment
+variables from `.env.example` through your deployment platform or `docker run`.
 
 ```bash
-docker compose up --build
+docker build -t mishiai-backend .
+docker run --env-file .env -p 8000:8000 mishiai-backend
 ```
-
-This starts MongoDB, the API on port 8000, the public site on port 3000, and
-the dashboard on port 3001.
 
 ## API
 

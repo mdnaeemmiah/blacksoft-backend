@@ -5,10 +5,12 @@ from app.api.routes.dashboard import router as dashboard_router
 from app.api.routes.capabilities import router as capabilities_router
 from app.api.routes.innovators import router as innovators_router
 from app.api.routes.uploads import router as uploads_router
+from app.api.routes.auth import router as auth_router
 from app.core.config import get_settings
 from app.db.mongodb import close_mongo_connection, connect_to_mongo
 from app.services.cloudinary_service import configure_cloudinary
 from app.services.dashboard_seed import seed_dashboard_content
+from app.services.auth_service import create_admin_user, validate_auth_settings
 
 settings = get_settings()
 
@@ -25,7 +27,9 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def on_startup() -> None:
+    validate_auth_settings()
     await connect_to_mongo()
+    await create_admin_user()
     configure_cloudinary()
     await seed_dashboard_content()
 
@@ -44,3 +48,4 @@ app.include_router(capabilities_router, prefix=settings.api_prefix)
 app.include_router(innovators_router, prefix=settings.api_prefix)
 app.include_router(uploads_router, prefix=settings.api_prefix)
 app.include_router(dashboard_router, prefix=settings.api_prefix)
+app.include_router(auth_router, prefix=settings.api_prefix)

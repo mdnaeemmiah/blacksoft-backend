@@ -1,10 +1,11 @@
 from __future__ import annotations
 
 from bson import ObjectId
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status
 
 from app.db.mongodb import get_db
 from app.models.common import as_document_id
+from app.core.security import require_dashboard_user
 from app.schemas.capability import CapabilityCreate, CapabilityResponse, CapabilityUpdate
 from app.schemas.innovator import InnovatorCreate, InnovatorResponse, InnovatorUpdate
 from app.schemas.dashboard import (
@@ -29,7 +30,11 @@ from app.schemas.dashboard import (
     TechnologyStackSettingsUpdate,
 )
 
-router = APIRouter(prefix="/dashboard", tags=["Dashboard"])
+router = APIRouter(
+    prefix="/dashboard",
+    tags=["Dashboard"],
+    dependencies=[Depends(require_dashboard_user)],
+)
 
 
 def serialize_document(document: dict) -> dict:

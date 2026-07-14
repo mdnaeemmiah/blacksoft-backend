@@ -24,6 +24,21 @@ class Settings(BaseSettings):
     cloudinary_api_secret: str = Field(default="", alias="CLOUDINARY_API_SECRET")
     cloudinary_folder: str = Field(default="mishiai", alias="CLOUDINARY_FOLDER")
 
+    admin_email: str = Field(default="", alias="ADMIN_EMAIL")
+    admin_password: str = Field(default="", alias="ADMIN_PASSWORD")
+    jwt_secret: str = Field(default="change-this-in-production", alias="JWT_SECRET")
+    jwt_algorithm: str = Field(default="HS256", alias="JWT_ALGORITHM")
+    access_token_minutes: int = Field(default=480, alias="ACCESS_TOKEN_MINUTES")
+    verification_code_minutes: int = Field(default=10, alias="VERIFICATION_CODE_MINUTES")
+    max_code_attempts: int = Field(default=5, alias="MAX_CODE_ATTEMPTS")
+
+    smtp_host: str = Field(default="", alias="SMTP_HOST")
+    smtp_port: int = Field(default=587, alias="SMTP_PORT")
+    smtp_username: str = Field(default="", alias="SMTP_USERNAME")
+    smtp_password: str = Field(default="", alias="SMTP_PASSWORD")
+    smtp_from: str = Field(default="", alias="SMTP_FROM")
+    smtp_use_tls: bool = Field(default=True, alias="SMTP_USE_TLS")
+
     @property
     def cors_origins(self) -> list[str]:
         return [origin.strip() for origin in self.allowed_origins.split(",") if origin.strip()]

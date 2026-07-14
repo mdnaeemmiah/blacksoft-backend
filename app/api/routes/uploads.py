@@ -3,15 +3,16 @@ from __future__ import annotations
 import os
 import tempfile
 
-from fastapi import APIRouter, File, HTTPException, UploadFile, status
+from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
 
 from app.schemas.upload import UploadResponse
 from app.services.cloudinary_service import upload_image_to_cloudinary
+from app.core.security import require_dashboard_user
 
 router = APIRouter(prefix="/uploads", tags=["Uploads"])
 
 
-@router.post("/image", response_model=UploadResponse, status_code=status.HTTP_201_CREATED)
+@router.post("/image", response_model=UploadResponse, status_code=status.HTTP_201_CREATED, dependencies=[Depends(require_dashboard_user)])
 async def upload_image(file: UploadFile = File(...)):
     suffix = os.path.splitext(file.filename or "")[1] or ".bin"
     temp_path = None
