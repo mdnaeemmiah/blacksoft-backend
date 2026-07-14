@@ -25,6 +25,21 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
+The public frontend runs on port 3000 and the standalone dashboard runs on
+port 3001. Both use `http://localhost:8000/api`; configure their respective
+`.env` files from `.env.example` when using a different API host.
+
+## Docker
+
+From the repository root, copy `.env.example` to `.env` and run:
+
+```bash
+docker compose up --build
+```
+
+This starts MongoDB, the API on port 8000, the public site on port 3000, and
+the dashboard on port 3001.
+
 ## API
 
 - `GET /api/health`
