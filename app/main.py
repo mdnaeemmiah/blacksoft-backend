@@ -1,12 +1,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.api.routes.dashboard import router as dashboard_router
 from app.api.routes.capabilities import router as capabilities_router
 from app.api.routes.innovators import router as innovators_router
 from app.api.routes.uploads import router as uploads_router
 from app.core.config import get_settings
 from app.db.mongodb import close_mongo_connection, connect_to_mongo
 from app.services.cloudinary_service import configure_cloudinary
+from app.services.dashboard_seed import seed_dashboard_content
 
 settings = get_settings()
 
@@ -25,6 +27,7 @@ app.add_middleware(
 async def on_startup() -> None:
     await connect_to_mongo()
     configure_cloudinary()
+    await seed_dashboard_content()
 
 
 @app.on_event("shutdown")
@@ -40,3 +43,4 @@ async def health_check() -> dict[str, str]:
 app.include_router(capabilities_router, prefix=settings.api_prefix)
 app.include_router(innovators_router, prefix=settings.api_prefix)
 app.include_router(uploads_router, prefix=settings.api_prefix)
+app.include_router(dashboard_router, prefix=settings.api_prefix)
