@@ -36,6 +36,7 @@ class EcommerceCardResponse(EcommerceCardBase):
 class SolutionCardBase(BaseModel):
     title: str = Field(min_length=1, max_length=120)
     description: str = Field(min_length=1, max_length=1000)
+    category: str = Field(default="App", max_length=120)
     icon: str = Field(default="AI", max_length=40)
     link: str = Field(default="#solutions", max_length=250)
     enabled: bool = True
@@ -48,6 +49,7 @@ class AppWebsiteCardCreate(SolutionCardBase):
 class AppWebsiteCardUpdate(BaseModel):
     title: str | None = Field(default=None, min_length=1, max_length=120)
     description: str | None = Field(default=None, min_length=1, max_length=1000)
+    category: str | None = Field(default=None, max_length=120)
     icon: str | None = Field(default=None, max_length=40)
     link: str | None = Field(default=None, max_length=250)
     enabled: bool | None = None
@@ -124,6 +126,9 @@ class TeamMemberBase(BaseModel):
     role: str = Field(min_length=1, max_length=120)
     image_src: str = Field(default="", alias="imageSrc", max_length=500)
     image_alt: str = Field(default="Team member image", alias="imageAlt", max_length=200)
+    logo: str = Field(default="", max_length=500)
+    bio: str = Field(default="", max_length=1000)
+    link: str = Field(default="", max_length=500)
     enabled: bool = True
 
     model_config = ConfigDict(populate_by_name=True)
@@ -138,6 +143,9 @@ class TeamMemberUpdate(BaseModel):
     role: str | None = Field(default=None, min_length=1, max_length=120)
     image_src: str | None = Field(default=None, alias="imageSrc", max_length=500)
     image_alt: str | None = Field(default=None, alias="imageAlt", max_length=200)
+    logo: str | None = Field(default=None, max_length=500)
+    bio: str | None = Field(default=None, max_length=1000)
+    link: str | None = Field(default=None, max_length=500)
     enabled: bool | None = None
 
     model_config = ConfigDict(populate_by_name=True)
@@ -171,3 +179,44 @@ class TeamSettingsResponse(TeamSettingsBase):
     id: str
 
     model_config = ConfigDict(populate_by_name=True)
+
+
+class WhoWeAreSettingsBase(BaseModel):
+    tag: str = Field(min_length=1, max_length=120)
+    title: str = Field(min_length=1, max_length=500)
+    description: str = Field(min_length=1, max_length=2000)
+    
+    highlight1_num: str = Field(min_length=1, max_length=50, alias="highlight1Num")
+    highlight1_label: str = Field(min_length=1, max_length=120, alias="highlight1Label")
+
+    highlight2_num: str = Field(min_length=1, max_length=50, alias="highlight2Num")
+    highlight2_label: str = Field(min_length=1, max_length=120, alias="highlight2Label")
+
+    highlight3_num: str = Field(min_length=1, max_length=50, alias="highlight3Num")
+    highlight3_label: str = Field(min_length=1, max_length=120, alias="highlight3Label")
+
+    model_config = ConfigDict(populate_by_name=True)
+
+
+class WhoWeAreSettingsUpdate(BaseModel):
+    tag: str | None = Field(default=None, min_length=1, max_length=120)
+    title: str | None = Field(default=None, min_length=1, max_length=500)
+    description: str | None = Field(default=None, min_length=1, max_length=2000)
+
+    highlight1_num: str | None = Field(default=None, min_length=1, max_length=50, alias="highlight1Num")
+    highlight1_label: str | None = Field(default=None, min_length=1, max_length=120, alias="highlight1Label")
+
+    highlight2_num: str | None = Field(default=None, min_length=1, max_length=50, alias="highlight2Num")
+    highlight2_label: str | None = Field(default=None, min_length=1, max_length=120, alias="highlight2Label")
+
+    highlight3_num: str | None = Field(default=None, min_length=1, max_length=50, alias="highlight3Num")
+    highlight3_label: str | None = Field(default=None, min_length=1, max_length=120, alias="highlight3Label")
+
+    model_config = ConfigDict(populate_by_name=True)
+
+
+class WhoWeAreSettingsResponse(WhoWeAreSettingsBase):
+    id: str
+
+    model_config = ConfigDict(populate_by_name=True)
+

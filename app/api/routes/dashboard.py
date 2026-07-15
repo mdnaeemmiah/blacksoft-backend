@@ -28,9 +28,16 @@ from app.schemas.dashboard import (
     TechnologyStackCardUpdate,
     TechnologyStackSettingsResponse,
     TechnologyStackSettingsUpdate,
+    WhoWeAreSettingsResponse,
+    WhoWeAreSettingsUpdate,
 )
 
 router = APIRouter(
+    prefix="/dashboard",
+    tags=["Dashboard"],
+)
+
+admin_router = APIRouter(
     prefix="/dashboard",
     tags=["Dashboard"],
     dependencies=[Depends(require_dashboard_user)],
@@ -154,17 +161,17 @@ async def list_capabilities():
     return await list_documents("capabilities")
 
 
-@router.post("/capabilities", response_model=CapabilityResponse, status_code=status.HTTP_201_CREATED)
+@admin_router.post("/capabilities", response_model=CapabilityResponse, status_code=status.HTTP_201_CREATED)
 async def create_capability(payload: CapabilityCreate):
     return await create_document("capabilities", payload.model_dump())
 
 
-@router.put("/capabilities/{capability_id}", response_model=CapabilityResponse)
+@admin_router.put("/capabilities/{capability_id}", response_model=CapabilityResponse)
 async def update_capability(capability_id: str, payload: CapabilityUpdate):
     return await update_document("capabilities", capability_id, payload.model_dump(), "Capability not found")
 
 
-@router.delete("/capabilities/{capability_id}", status_code=status.HTTP_204_NO_CONTENT)
+@admin_router.delete("/capabilities/{capability_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_capability(capability_id: str):
     await delete_document("capabilities", capability_id, "Capability not found")
     return None
@@ -175,17 +182,17 @@ async def list_innovators():
     return await list_documents("innovators")
 
 
-@router.post("/innovators", response_model=InnovatorResponse, status_code=status.HTTP_201_CREATED)
+@admin_router.post("/innovators", response_model=InnovatorResponse, status_code=status.HTTP_201_CREATED)
 async def create_innovator(payload: InnovatorCreate):
     return await create_document("innovators", payload.model_dump())
 
 
-@router.put("/innovators/{innovator_id}", response_model=InnovatorResponse)
+@admin_router.put("/innovators/{innovator_id}", response_model=InnovatorResponse)
 async def update_innovator(innovator_id: str, payload: InnovatorUpdate):
     return await update_document("innovators", innovator_id, payload.model_dump(), "Innovator not found")
 
 
-@router.delete("/innovators/{innovator_id}", status_code=status.HTTP_204_NO_CONTENT)
+@admin_router.delete("/innovators/{innovator_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_innovator(innovator_id: str):
     await delete_document("innovators", innovator_id, "Innovator not found")
     return None
@@ -196,17 +203,17 @@ async def list_ecommerce_cards():
     return await list_documents("ecommerce_cards")
 
 
-@router.post("/ecommerce/cards", response_model=EcommerceCardResponse, status_code=status.HTTP_201_CREATED)
+@admin_router.post("/ecommerce/cards", response_model=EcommerceCardResponse, status_code=status.HTTP_201_CREATED)
 async def create_ecommerce_card(payload: EcommerceCardCreate):
     return await create_document("ecommerce_cards", payload.model_dump())
 
 
-@router.put("/ecommerce/cards/{card_id}", response_model=EcommerceCardResponse)
+@admin_router.put("/ecommerce/cards/{card_id}", response_model=EcommerceCardResponse)
 async def update_ecommerce_card(card_id: str, payload: EcommerceCardUpdate):
     return await update_document("ecommerce_cards", card_id, payload.model_dump(), "Ecommerce card not found")
 
 
-@router.delete("/ecommerce/cards/{card_id}", status_code=status.HTTP_204_NO_CONTENT)
+@admin_router.delete("/ecommerce/cards/{card_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_ecommerce_card(card_id: str):
     await delete_document("ecommerce_cards", card_id, "Ecommerce card not found")
     return None
@@ -217,17 +224,17 @@ async def list_app_website_cards():
     return await list_documents("app_website_cards")
 
 
-@router.post("/app-websites/cards", response_model=AppWebsiteCardResponse, status_code=status.HTTP_201_CREATED)
+@admin_router.post("/app-websites/cards", response_model=AppWebsiteCardResponse, status_code=status.HTTP_201_CREATED)
 async def create_app_website_card(payload: AppWebsiteCardCreate):
     return await create_document("app_website_cards", payload.model_dump())
 
 
-@router.put("/app-websites/cards/{card_id}", response_model=AppWebsiteCardResponse)
+@admin_router.put("/app-websites/cards/{card_id}", response_model=AppWebsiteCardResponse)
 async def update_app_website_card(card_id: str, payload: AppWebsiteCardUpdate):
     return await update_document("app_website_cards", card_id, payload.model_dump(), "App website card not found")
 
 
-@router.delete("/app-websites/cards/{card_id}", status_code=status.HTTP_204_NO_CONTENT)
+@admin_router.delete("/app-websites/cards/{card_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_app_website_card(card_id: str):
     await delete_document("app_website_cards", card_id, "App website card not found")
     return None
@@ -238,17 +245,17 @@ async def list_ai_solution_cards():
     return await list_documents("ai_solution_cards")
 
 
-@router.post("/ai-solutions/cards", response_model=AiSolutionCardResponse, status_code=status.HTTP_201_CREATED)
+@admin_router.post("/ai-solutions/cards", response_model=AiSolutionCardResponse, status_code=status.HTTP_201_CREATED)
 async def create_ai_solution_card(payload: AiSolutionCardCreate):
     return await create_document("ai_solution_cards", payload.model_dump())
 
 
-@router.put("/ai-solutions/cards/{card_id}", response_model=AiSolutionCardResponse)
+@admin_router.put("/ai-solutions/cards/{card_id}", response_model=AiSolutionCardResponse)
 async def update_ai_solution_card(card_id: str, payload: AiSolutionCardUpdate):
     return await update_document("ai_solution_cards", card_id, payload.model_dump(), "AI solution card not found")
 
 
-@router.delete("/ai-solutions/cards/{card_id}", status_code=status.HTTP_204_NO_CONTENT)
+@admin_router.delete("/ai-solutions/cards/{card_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_ai_solution_card(card_id: str):
     await delete_document("ai_solution_cards", card_id, "AI solution card not found")
     return None
@@ -259,17 +266,17 @@ async def list_technology_stack_cards():
     return await list_documents("technology_stack_cards")
 
 
-@router.post("/technology-stack/cards", response_model=TechnologyStackCardResponse, status_code=status.HTTP_201_CREATED)
+@admin_router.post("/technology-stack/cards", response_model=TechnologyStackCardResponse, status_code=status.HTTP_201_CREATED)
 async def create_technology_stack_card(payload: TechnologyStackCardCreate):
     return await create_document("technology_stack_cards", payload.model_dump())
 
 
-@router.put("/technology-stack/cards/{card_id}", response_model=TechnologyStackCardResponse)
+@admin_router.put("/technology-stack/cards/{card_id}", response_model=TechnologyStackCardResponse)
 async def update_technology_stack_card(card_id: str, payload: TechnologyStackCardUpdate):
     return await update_document("technology_stack_cards", card_id, payload.model_dump(), "Technology stack card not found")
 
 
-@router.delete("/technology-stack/cards/{card_id}", status_code=status.HTTP_204_NO_CONTENT)
+@admin_router.delete("/technology-stack/cards/{card_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_technology_stack_card(card_id: str):
     await delete_document("technology_stack_cards", card_id, "Technology stack card not found")
     return None
@@ -288,7 +295,7 @@ async def get_technology_stack_settings():
     )
 
 
-@router.put("/technology-stack/settings", response_model=TechnologyStackSettingsResponse)
+@admin_router.put("/technology-stack/settings", response_model=TechnologyStackSettingsResponse)
 async def update_technology_stack_settings(payload: TechnologyStackSettingsUpdate):
     return await upsert_settings_document(
         "technology_stack_settings",
@@ -307,17 +314,17 @@ async def list_team_members():
     return await list_documents("team_members")
 
 
-@router.post("/team-members/members", response_model=TeamMemberResponse, status_code=status.HTTP_201_CREATED)
+@admin_router.post("/team-members/members", response_model=TeamMemberResponse, status_code=status.HTTP_201_CREATED)
 async def create_team_member(payload: TeamMemberCreate):
     return await create_document("team_members", payload.model_dump())
 
 
-@router.put("/team-members/members/{member_id}", response_model=TeamMemberResponse)
+@admin_router.put("/team-members/members/{member_id}", response_model=TeamMemberResponse)
 async def update_team_member(member_id: str, payload: TeamMemberUpdate):
     return await update_document("team_members", member_id, payload.model_dump(), "Team member not found")
 
 
-@router.delete("/team-members/members/{member_id}", status_code=status.HTTP_204_NO_CONTENT)
+@admin_router.delete("/team-members/members/{member_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_team_member(member_id: str):
     await delete_document("team_members", member_id, "Team member not found")
     return None
@@ -338,7 +345,7 @@ async def get_team_settings():
     )
 
 
-@router.put("/team-members/settings", response_model=TeamSettingsResponse)
+@admin_router.put("/team-members/settings", response_model=TeamSettingsResponse)
 async def update_team_settings(payload: TeamSettingsUpdate):
     return await upsert_settings_document(
         "team_settings",
@@ -350,5 +357,46 @@ async def update_team_settings(payload: TeamSettingsUpdate):
             "subtitle": "A team of visionaries, engineers, and researchers dedicated to the pursuit of super-intelligence.",
             "cta_label": "Full Team History",
             "cta_link": "#careers",
+        },
+    )
+
+
+@router.get("/who-we-are/settings", response_model=WhoWeAreSettingsResponse)
+async def get_who_we_are_settings():
+    return await get_settings_document(
+        "who_we_are_settings",
+        "who_we_are",
+        {
+            "_id": "who_we_are",
+            "tag": "WHO WE ARE",
+            "title": "We are a collective of digital engineers, designers, and systems architects.",
+            "description": "At Blacksoft, we build high-fidelity software products, autonomous agent layers, and scalable cloud infrastructure for startups and modern companies.",
+            "highlight1Num": "50+",
+            "highlight1Label": "Intelligent Systems Shipped",
+            "highlight2Num": "99.9%",
+            "highlight2Label": "SLA System Availability",
+            "highlight3Num": "24/7",
+            "highlight3Label": "Continuous Optimization",
+        },
+    )
+
+
+@admin_router.put("/who-we-are/settings", response_model=WhoWeAreSettingsResponse)
+async def update_who_we_are_settings(payload: WhoWeAreSettingsUpdate):
+    return await upsert_settings_document(
+        "who_we_are_settings",
+        "who_we_are",
+        payload.model_dump(),
+        {
+            "_id": "who_we_are",
+            "tag": "WHO WE ARE",
+            "title": "We are a collective of digital engineers, designers, and systems architects.",
+            "description": "At Blacksoft, we build high-fidelity software products, autonomous agent layers, and scalable cloud infrastructure for startups and modern companies.",
+            "highlight1Num": "50+",
+            "highlight1Label": "Intelligent Systems Shipped",
+            "highlight2Num": "99.9%",
+            "highlight2Label": "SLA System Availability",
+            "highlight3Num": "24/7",
+            "highlight3Label": "Continuous Optimization",
         },
     )

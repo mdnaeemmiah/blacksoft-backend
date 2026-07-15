@@ -78,15 +78,15 @@ DEFAULT_ECOMMERCE_CARDS = [
 ]
 
 DEFAULT_APP_WEBSITE_CARDS = [
-    {"_id": "web-product-builds", "title": "Product websites", "description": "High-performance marketing sites and product surfaces that make complex technology easy to understand and use.", "icon": "WEB", "link": "#app-websites", "enabled": True},
-    {"_id": "web-client-portals", "title": "Client portals", "description": "Secure, responsive workspaces that bring customers, data, and operational workflows into one clear experience.", "icon": "UX", "link": "#app-websites", "enabled": True},
-    {"_id": "web-saas-platforms", "title": "SaaS platforms", "description": "Scalable application foundations with thoughtful onboarding, dashboards, permissions, and billing-ready architecture.", "icon": "APP", "link": "#app-websites", "enabled": True},
+    {"_id": "web-product-builds", "title": "Product websites", "category": "Website", "description": "High-performance marketing sites and product surfaces that make complex technology easy to understand and use.", "icon": "WEB", "link": "#app-websites", "enabled": True},
+    {"_id": "web-client-portals", "title": "Client portals", "category": "App", "description": "Secure, responsive workspaces that bring customers, data, and operational workflows into one clear experience.", "icon": "UX", "link": "#app-websites", "enabled": True},
+    {"_id": "web-saas-platforms", "title": "SaaS platforms", "category": "App", "description": "Scalable application foundations with thoughtful onboarding, dashboards, permissions, and billing-ready architecture.", "icon": "APP", "link": "#app-websites", "enabled": True},
 ]
 
 DEFAULT_AI_SOLUTION_CARDS = [
-    {"_id": "ai-agents", "title": "AI agents", "description": "Goal-oriented agents that reason across tools, knowledge, and business rules to move work forward autonomously.", "icon": "AG", "link": "#ai-solutions", "enabled": True},
-    {"_id": "ai-knowledge", "title": "Knowledge systems", "description": "Grounded search and retrieval systems that turn company knowledge into fast, trusted answers and actions.", "icon": "KN", "link": "#ai-solutions", "enabled": True},
-    {"_id": "ai-automation", "title": "Intelligent automation", "description": "Connected workflows that remove repetitive work while keeping people in control of important decisions.", "icon": "AU", "link": "#ai-solutions", "enabled": True},
+    {"_id": "ai-agents", "title": "AI agents", "category": "AI Solution", "description": "Goal-oriented agents that reason across tools, knowledge, and business rules to move work forward autonomously.", "icon": "AG", "link": "#ai-solutions", "enabled": True},
+    {"_id": "ai-knowledge", "title": "Knowledge systems", "category": "AI Solution", "description": "Grounded search and retrieval systems that turn company knowledge into fast, trusted answers and actions.", "icon": "KN", "link": "#ai-solutions", "enabled": True},
+    {"_id": "ai-automation", "title": "Intelligent automation", "category": "AI Solution", "description": "Connected workflows that remove repetitive work while keeping people in control of important decisions.", "icon": "AU", "link": "#ai-solutions", "enabled": True},
 ]
 
 DEFAULT_TECH_STACK_CARDS = [
@@ -130,40 +130,7 @@ DEFAULT_TECH_STACK_SETTINGS = {
     "section_subtitle": "Built on battle-tested frameworks and advanced cloud kernels.",
 }
 
-DEFAULT_TEAM_MEMBERS = [
-    {
-        "_id": "team-member-1",
-        "name": "Dr. Elena Vance",
-        "role": "CHIEF SCIENTIST & FOUNDER",
-        "image_src": "/images/team_elena.png",
-        "image_alt": "Dr. Elena Vance - Chief Scientist & Founder at Blacksoft",
-        "enabled": True,
-    },
-    {
-        "_id": "team-member-2",
-        "name": "Marcus Thorne",
-        "role": "HEAD OF ENGINEERING",
-        "image_src": "/images/team_marcus.png",
-        "image_alt": "Marcus Thorne - Head of Engineering at Blacksoft",
-        "enabled": True,
-    },
-    {
-        "_id": "team-member-3",
-        "name": "Sarah Chen",
-        "role": "VP OF STRATEGY",
-        "image_src": "/images/team_sarah.png",
-        "image_alt": "Sarah Chen - VP of Strategy at Blacksoft",
-        "enabled": True,
-    },
-    {
-        "_id": "team-member-4",
-        "name": "Julian Kross",
-        "role": "LEAD NEURAL ARCHITECT",
-        "image_src": "/images/team_julian.png",
-        "image_alt": "Julian Kross - Lead Neural Architect at Blacksoft",
-        "enabled": True,
-    },
-]
+DEFAULT_TEAM_MEMBERS = []
 
 DEFAULT_TEAM_SETTINGS = {
     "_id": "team_members",
@@ -174,8 +141,102 @@ DEFAULT_TEAM_SETTINGS = {
 }
 
 
+DEFAULT_SERVICES = [
+    {
+        "_id": "ai-first-systems",
+        "title": "AI-First Architectures",
+        "description": "Custom agentic systems, context-aware LLMs, and intelligent automation pipelines built to handle sophisticated cognitive tasks.",
+        "icon": "🧠",
+        "enabled": True,
+    },
+    {
+        "_id": "next-gen-web",
+        "title": "Next-Gen Web Platforms",
+        "description": "High-fidelity, responsive, and server-rendered web systems designed for lightning-fast speeds and premium user interaction.",
+        "icon": "🌐",
+        "enabled": True,
+    },
+    {
+        "_id": "mobile-solutions",
+        "title": "Native & Mobile Solutions",
+        "description": "Fluid, high-performance applications built for iOS and Android, focusing on modern aesthetics and optimized response times.",
+        "icon": "📱",
+        "enabled": True,
+    },
+    {
+        "_id": "interactive-design",
+        "title": "Interactive Product Design",
+        "description": "Crafting premium user journeys, dynamic wireframes, and design blueprints structured around user experience clarity.",
+        "icon": "🎨",
+        "enabled": True,
+    },
+    {
+        "_id": "brand-identity",
+        "title": "Brand Strategy & Systems",
+        "description": "Formulating complete visual languages, brand typography, vector assets, and design libraries to build a memorable identity.",
+        "icon": "✨",
+        "enabled": True,
+    },
+]
+
+
+DEFAULT_WHO_WE_ARE_SETTINGS = {
+    "_id": "who_we_are",
+    "tag": "WHO WE ARE",
+    "title": "We are a collective of digital engineers, designers, and systems architects.",
+    "description": "At Blacksoft, we build high-fidelity software products, autonomous agent layers, and scalable cloud infrastructure for startups and modern companies.",
+    "highlight1Num": "50+",
+    "highlight1Label": "Intelligent Systems Shipped",
+    "highlight2Num": "99.9%",
+    "highlight2Label": "SLA System Availability",
+    "highlight3Num": "24/7",
+    "highlight3Label": "Continuous Optimization",
+}
+
+
+DEFAULT_WHY_US = [
+    {
+        "_id": "ai-native-exec",
+        "title": "AI-Native Execution",
+        "description": "We build software with modern LLM backbones, enabling rapid code generation and highly adaptive logic paths.",
+        "icon": "⚡",
+        "enabled": True,
+    },
+    {
+        "_id": "enterprise-sec",
+        "title": "Enterprise Security",
+        "description": "Built on zero-trust principles, SOC 2 alignment, and strict data boundary configurations to keep your assets safe.",
+        "icon": "🔒",
+        "enabled": True,
+    },
+    {
+        "_id": "absolute-scale",
+        "title": "Absolute Scalability",
+        "description": "Designed to handle high request concurrency and massive user spikes with containerized compute nodes.",
+        "icon": "🚀",
+        "enabled": True,
+    },
+    {
+        "_id": "collab-partners",
+        "title": "Collaborative Partners",
+        "description": "We work closely with your internal teams, transferring all product knowledge and code ownership smoothly.",
+        "icon": "🤝",
+        "enabled": True,
+    },
+]
+
+
 async def seed_dashboard_content() -> None:
     db = get_db()
+    
+    # Ensure services list updates to the new premium names
+    await db.services.delete_many({})
+    await db.services.insert_many(DEFAULT_SERVICES)
+
+    # Ensure why us list updates to the new defaults
+    await db.why_us.delete_many({})
+    await db.why_us.insert_many(DEFAULT_WHY_US)
+
     seeds = [
         ("capabilities", DEFAULT_CAPABILITIES),
         ("innovators", DEFAULT_INNOVATORS),
@@ -194,6 +255,7 @@ async def seed_dashboard_content() -> None:
     settings_seeds = [
         ("technology_stack_settings", DEFAULT_TECH_STACK_SETTINGS),
         ("team_settings", DEFAULT_TEAM_SETTINGS),
+        ("who_we_are_settings", DEFAULT_WHO_WE_ARE_SETTINGS),
     ]
 
     for collection_name, document in settings_seeds:

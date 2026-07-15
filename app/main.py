@@ -1,11 +1,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.routes.dashboard import router as dashboard_router
+from app.api.routes.dashboard import router as dashboard_router, admin_router as dashboard_admin_router
 from app.api.routes.capabilities import router as capabilities_router
 from app.api.routes.innovators import router as innovators_router
 from app.api.routes.uploads import router as uploads_router
 from app.api.routes.auth import router as auth_router
+from app.api.routes.bookings import router as bookings_router
+from app.api.routes.services import router as services_router
+from app.api.routes.why_us import router as why_us_router
 from app.core.config import get_settings
 from app.db.mongodb import close_mongo_connection, connect_to_mongo
 from app.services.cloudinary_service import configure_cloudinary
@@ -48,4 +51,8 @@ app.include_router(capabilities_router, prefix=settings.api_prefix)
 app.include_router(innovators_router, prefix=settings.api_prefix)
 app.include_router(uploads_router, prefix=settings.api_prefix)
 app.include_router(dashboard_router, prefix=settings.api_prefix)
+app.include_router(dashboard_admin_router, prefix=settings.api_prefix)
 app.include_router(auth_router, prefix=settings.api_prefix)
+app.include_router(bookings_router, prefix=settings.api_prefix)
+app.include_router(services_router, prefix=settings.api_prefix)
+app.include_router(why_us_router, prefix=settings.api_prefix)
