@@ -324,6 +324,19 @@ DEFAULT_TECH_STACK_CARDS = [
         "enabled": True,
     },
 ]
+
+DEFAULT_APP_WEBSITE_CARDS = [
+    {"_id": "web-product-builds", "title": "Product websites", "category": "Website", "description": "High-performance marketing sites and product surfaces that make complex technology easy to understand and use.", "icon": "WEB", "link": "#app-websites", "enabled": True},
+    {"_id": "web-client-portals", "title": "Client portals", "category": "App", "description": "Secure, responsive workspaces that bring customers, data, and operational workflows into one clear experience.", "icon": "UX", "link": "#app-websites", "enabled": True},
+    {"_id": "web-saas-platforms", "title": "SaaS platforms", "category": "App", "description": "Scalable application foundations with thoughtful onboarding, dashboards, permissions, and billing-ready architecture.", "icon": "APP", "link": "#app-websites", "enabled": True},
+]
+
+DEFAULT_AI_SOLUTION_CARDS = [
+    {"_id": "ai-agents", "title": "AI agents", "category": "AI Solution", "description": "Goal-oriented agents that reason across tools, knowledge, and business rules to move work forward autonomously.", "icon": "AG", "link": "#ai-solutions", "enabled": True},
+    {"_id": "ai-knowledge", "title": "Knowledge systems", "category": "AI Solution", "description": "Grounded search and retrieval systems that turn company knowledge into fast, trusted answers and actions.", "icon": "KN", "link": "#ai-solutions", "enabled": True},
+    {"_id": "ai-automation", "title": "Intelligent automation", "category": "AI Solution", "description": "Connected workflows that remove repetitive work while keeping people in control of important decisions.", "icon": "AU", "link": "#ai-solutions", "enabled": True},
+]
+
 DEFAULT_TECH_STACK_SETTINGS = {
     "_id": "technology_stack",
     "section_title": "Our Technology Stack",
