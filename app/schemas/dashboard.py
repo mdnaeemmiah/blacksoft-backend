@@ -39,7 +39,11 @@ class SolutionCardBase(BaseModel):
     category: str = Field(default="App", max_length=120)
     icon: str = Field(default="AI", max_length=40)
     link: str = Field(default="#solutions", max_length=250)
+    image_src: str = Field(default="", alias="imageSrc", max_length=500)
+    image_alt: str = Field(default="", alias="imageAlt", max_length=200)
     enabled: bool = True
+
+    model_config = ConfigDict(populate_by_name=True)
 
 
 class AppWebsiteCardCreate(SolutionCardBase):
@@ -52,7 +56,11 @@ class AppWebsiteCardUpdate(BaseModel):
     category: str | None = Field(default=None, max_length=120)
     icon: str | None = Field(default=None, max_length=40)
     link: str | None = Field(default=None, max_length=250)
+    image_src: str | None = Field(default=None, alias="imageSrc", max_length=500)
+    image_alt: str | None = Field(default=None, alias="imageAlt", max_length=200)
     enabled: bool | None = None
+
+    model_config = ConfigDict(populate_by_name=True)
 
 
 class AppWebsiteCardResponse(SolutionCardBase):
