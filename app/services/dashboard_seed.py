@@ -451,7 +451,7 @@ DEFAULT_WHY_US = [
 
 async def seed_dashboard_content() -> None:
     db = get_db()
-    
+
     # Ensure services list updates to the new premium names
     await db.services.delete_many({})
     await db.services.insert_many(DEFAULT_SERVICES)
@@ -460,20 +460,30 @@ async def seed_dashboard_content() -> None:
     await db.why_us.delete_many({})
     await db.why_us.insert_many(DEFAULT_WHY_US)
 
-    seeds = [
+    # Collections that only seed when empty (insert-once)
+    insert_once_seeds = [
         ("capabilities", DEFAULT_CAPABILITIES),
         ("innovators", DEFAULT_INNOVATORS),
         ("ecommerce_cards", DEFAULT_ECOMMERCE_CARDS),
         ("app_website_cards", DEFAULT_APP_WEBSITE_CARDS),
         ("ai_solution_cards", DEFAULT_AI_SOLUTION_CARDS),
-        ("technology_stack_cards", DEFAULT_TECH_STACK_CARDS),
         ("team_members", DEFAULT_TEAM_MEMBERS),
     ]
 
-    for collection_name, documents in seeds:
+    for collection_name, documents in insert_once_seeds:
         collection = getattr(db, collection_name)
         if await collection.count_documents({}) == 0 and documents:
             await collection.insert_many(documents)
+
+    # Technology stack cards: always upsert so new cards are added on redeploy
+    # without removing cards the user has added via the dashboard.
+    tech_collection = db.technology_stack_cards
+    for card in DEFAULT_TECH_STACK_CARDS:
+        await tech_collection.update_one(
+            {"_id": card["_id"]},
+            {"$setOnInsert": card},
+            upsert=True,
+        )
 
     settings_seeds = [
         ("technology_stack_settings", DEFAULT_TECH_STACK_SETTINGS),
@@ -485,3 +495,4 @@ async def seed_dashboard_content() -> None:
         collection = getattr(db, collection_name)
         if await collection.count_documents({}) == 0:
             await collection.insert_one(document)
+
