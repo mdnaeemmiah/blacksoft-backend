@@ -136,6 +136,7 @@ async def upsert_settings_document(collection_name: str, document_id: str, paylo
     else:
         next_document = dict(existing)
 
+    # Allow empty strings through — only skip fields where the value is explicitly None
     next_document.update({key: value for key, value in payload.items() if value is not None})
     next_document["_id"] = document_id
 
