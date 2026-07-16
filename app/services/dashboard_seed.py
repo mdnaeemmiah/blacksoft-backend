@@ -249,7 +249,7 @@ async def seed_dashboard_content() -> None:
 
     for collection_name, documents in seeds:
         collection = getattr(db, collection_name)
-        if await collection.count_documents({}) == 0:
+        if await collection.count_documents({}) == 0 and documents:
             await collection.insert_many(documents)
 
     settings_seeds = [
