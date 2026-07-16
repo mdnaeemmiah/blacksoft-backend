@@ -97,15 +97,15 @@ async def get_public_stats_settings():
     if document is None:
         return {
             "id": "stats",
-            "stat1Value": "50+",
-            "stat1Label": "Products Shipped",
-            "stat1Description": "High-performance solutions deployed globally for industry leaders.",
-            "stat2Value": "$250M+",
-            "stat2Label": "Value Generated",
-            "stat2Description": "Measured ROI and operational efficiency delivered for our partners.",
-            "stat3Value": "100%",
-            "stat3Label": "Success Rate",
-            "stat3Description": "Unwavering technical excellence and commitment to project delivery.",
+            "stat1Value": "",
+            "stat1Label": "",
+            "stat1Description": "",
+            "stat2Value": "",
+            "stat2Label": "",
+            "stat2Description": "",
+            "stat3Value": "",
+            "stat3Label": "",
+            "stat3Description": "",
         }
     doc = dict(document)
     doc["id"] = str(doc.pop("_id"))
