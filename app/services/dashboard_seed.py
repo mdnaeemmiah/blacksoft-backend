@@ -442,16 +442,10 @@ DEFAULT_WHY_US = [
 async def seed_dashboard_content() -> None:
     db = get_db()
 
-    # Ensure services list updates to the new premium names
-    await db.services.delete_many({})
-    await db.services.insert_many(DEFAULT_SERVICES)
-
-    # Ensure why us list updates to the new defaults
-    await db.why_us.delete_many({})
-    await db.why_us.insert_many(DEFAULT_WHY_US)
-
     # Collections that only seed when empty (insert-once)
     insert_once_seeds = [
+        ("services", DEFAULT_SERVICES),
+        ("why_us", DEFAULT_WHY_US),
         ("capabilities", DEFAULT_CAPABILITIES),
         ("innovators", DEFAULT_INNOVATORS),
         ("ecommerce_cards", DEFAULT_ECOMMERCE_CARDS),
