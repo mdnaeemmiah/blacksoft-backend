@@ -5,7 +5,7 @@ from app.db.mongodb import get_db
 from app.models.common import as_object_id, stringify_object_id
 from app.core.security import require_dashboard_user
 from app.schemas.service import ServiceCreate, ServiceResponse, ServiceUpdate
-from app.schemas.dashboard import WhoWeAreSettingsResponse
+from app.schemas.dashboard import WhoWeAreSettingsResponse, StatsSettingsResponse
 
 router = APIRouter(prefix="/services", tags=["Services"])
 
@@ -88,3 +88,26 @@ async def get_public_who_we_are_settings():
     doc = dict(document)
     doc["id"] = str(doc.pop("_id"))
     return doc
+
+
+@router.get("/stats/settings", response_model=StatsSettingsResponse)
+async def get_public_stats_settings():
+    db = get_db()
+    document = await db.stats_settings.find_one({"_id": "stats"})
+    if document is None:
+        return {
+            "id": "stats",
+            "stat1Value": "50+",
+            "stat1Label": "Products Shipped",
+            "stat1Description": "High-performance solutions deployed globally for industry leaders.",
+            "stat2Value": "$250M+",
+            "stat2Label": "Value Generated",
+            "stat2Description": "Measured ROI and operational efficiency delivered for our partners.",
+            "stat3Value": "100%",
+            "stat3Label": "Success Rate",
+            "stat3Description": "Unwavering technical excellence and commitment to project delivery.",
+        }
+    doc = dict(document)
+    doc["id"] = str(doc.pop("_id"))
+    return doc
+

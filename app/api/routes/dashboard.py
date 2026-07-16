@@ -30,6 +30,8 @@ from app.schemas.dashboard import (
     TechnologyStackSettingsUpdate,
     WhoWeAreSettingsResponse,
     WhoWeAreSettingsUpdate,
+    StatsSettingsResponse,
+    StatsSettingsUpdate,
 )
 
 router = APIRouter(
@@ -400,3 +402,45 @@ async def update_who_we_are_settings(payload: WhoWeAreSettingsUpdate):
             "highlight3Label": "Continuous Optimization",
         },
     )
+
+
+@router.get("/stats/settings", response_model=StatsSettingsResponse)
+async def get_stats_settings():
+    return await get_settings_document(
+        "stats_settings",
+        "stats",
+        {
+            "_id": "stats",
+            "stat1Value": "50+",
+            "stat1Label": "Products Shipped",
+            "stat1Description": "High-performance solutions deployed globally for industry leaders.",
+            "stat2Value": "$250M+",
+            "stat2Label": "Value Generated",
+            "stat2Description": "Measured ROI and operational efficiency delivered for our partners.",
+            "stat3Value": "100%",
+            "stat3Label": "Success Rate",
+            "stat3Description": "Unwavering technical excellence and commitment to project delivery.",
+        },
+    )
+
+
+@admin_router.put("/stats/settings", response_model=StatsSettingsResponse)
+async def update_stats_settings(payload: StatsSettingsUpdate):
+    return await upsert_settings_document(
+        "stats_settings",
+        "stats",
+        payload.model_dump(),
+        {
+            "_id": "stats",
+            "stat1Value": "50+",
+            "stat1Label": "Products Shipped",
+            "stat1Description": "High-performance solutions deployed globally for industry leaders.",
+            "stat2Value": "$250M+",
+            "stat2Label": "Value Generated",
+            "stat2Description": "Measured ROI and operational efficiency delivered for our partners.",
+            "stat3Value": "100%",
+            "stat3Label": "Success Rate",
+            "stat3Description": "Unwavering technical excellence and commitment to project delivery.",
+        },
+    )
+

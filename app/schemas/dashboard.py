@@ -232,3 +232,42 @@ class WhoWeAreSettingsResponse(WhoWeAreSettingsBase):
 
     model_config = ConfigDict(populate_by_name=True)
 
+
+class StatsSettingsBase(BaseModel):
+    stat1_value: str = Field(min_length=1, max_length=50, alias="stat1Value")
+    stat1_label: str = Field(min_length=1, max_length=120, alias="stat1Label")
+    stat1_description: str = Field(min_length=1, max_length=500, alias="stat1Description")
+
+    stat2_value: str = Field(min_length=1, max_length=50, alias="stat2Value")
+    stat2_label: str = Field(min_length=1, max_length=120, alias="stat2Label")
+    stat2_description: str = Field(min_length=1, max_length=500, alias="stat2Description")
+
+    stat3_value: str = Field(min_length=1, max_length=50, alias="stat3Value")
+    stat3_label: str = Field(min_length=1, max_length=120, alias="stat3Label")
+    stat3_description: str = Field(min_length=1, max_length=500, alias="stat3Description")
+
+    model_config = ConfigDict(populate_by_name=True)
+
+
+class StatsSettingsUpdate(BaseModel):
+    stat1_value: str | None = Field(default=None, min_length=1, max_length=50, alias="stat1Value")
+    stat1_label: str | None = Field(default=None, min_length=1, max_length=120, alias="stat1Label")
+    stat1_description: str | None = Field(default=None, min_length=1, max_length=500, alias="stat1Description")
+
+    stat2_value: str | None = Field(default=None, min_length=1, max_length=50, alias="stat2Value")
+    stat2_label: str | None = Field(default=None, min_length=1, max_length=120, alias="stat2Label")
+    stat2_description: str | None = Field(default=None, min_length=1, max_length=500, alias="stat2Description")
+
+    stat3_value: str | None = Field(default=None, min_length=1, max_length=50, alias="stat3Value")
+    stat3_label: str | None = Field(default=None, min_length=1, max_length=120, alias="stat3Label")
+    stat3_description: str | None = Field(default=None, min_length=1, max_length=500, alias="stat3Description")
+
+    model_config = ConfigDict(populate_by_name=True)
+
+
+class StatsSettingsResponse(StatsSettingsBase):
+    id: str
+
+    model_config = ConfigDict(populate_by_name=True)
+
+
