@@ -33,6 +33,7 @@ class LoginRequest(EmailModel):
 class LoginChallengeResponse(BaseModel):
     challenge_id: str
     expires_in: int
+    code: str | None = None
 
 
 class VerifyLoginRequest(BaseModel):

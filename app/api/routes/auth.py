@@ -26,12 +26,19 @@ async def login(payload: LoginRequest):
     if user is None or not verify_password(payload.password, user.get("password_hash", "")):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid email or password")
 
+    challenge_id, code = await create_code_challenge(email, "login")
+    email_sent = True
     try:
-        challenge_id, code = await create_code_challenge(email, "login")
         await send_email("masabimiskat@gmail.com", "Your Blacksoft dashboard verification code", f"Your verification code is {code}. It expires soon.")
     except Exception as exc:
-        raise HTTPException(status_code=503, detail=f"Failed to generate challenge or send verification email: {str(exc)}") from exc
-    return LoginChallengeResponse(challenge_id=challenge_id, expires_in=get_settings().verification_code_minutes * 60)
+        email_sent = False
+        print(f"Failed to send verification email: {exc}")
+
+    return LoginChallengeResponse(
+        challenge_id=challenge_id,
+        expires_in=get_settings().verification_code_minutes * 60,
+        code=code if not email_sent else None
+    )
 
 
 @router.post("/verify-login", response_model=TokenResponse)
