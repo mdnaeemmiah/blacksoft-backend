@@ -78,11 +78,44 @@ DEFAULT_ECOMMERCE_CARDS = [
 ]
 
 DEFAULT_TECH_STACK_CARDS = [
-    # ── FRONTEND FRAMEWORKS ──────────────────────────────────────────────
+    # ── FIGMA ──────────────────────────────────────────────────────────────
+    {
+        "_id": "tech-figma",
+        "title": "Figma",
+        "category": "FIGMA",
+        "description": "Industry-standard collaborative design tool for creating wireframes, UI systems, prototypes, and high-fidelity mockups in real time.",
+        "icon_key": "design",
+        "enabled": True,
+    },
+    {
+        "_id": "tech-figma-variables",
+        "title": "Figma Variables & Tokens",
+        "category": "FIGMA",
+        "description": "Design token system inside Figma enabling shared color, spacing, and typography scales across the entire product design system.",
+        "icon_key": "design",
+        "enabled": True,
+    },
+    {
+        "_id": "tech-figma-auto-layout",
+        "title": "Auto Layout & Components",
+        "category": "FIGMA",
+        "description": "Responsive component architecture with auto layout, nested variants, and interactive prototyping flows for pixel-perfect handoffs.",
+        "icon_key": "design",
+        "enabled": True,
+    },
+    {
+        "_id": "tech-tailwind",
+        "title": "Tailwind CSS",
+        "category": "FIGMA",
+        "description": "Utility-first CSS framework enabling rapid UI development with consistent design tokens — pairs perfectly with Figma design systems.",
+        "icon_key": "design",
+        "enabled": True,
+    },
+    # ── FRONTEND ───────────────────────────────────────────────────────────
     {
         "_id": "tech-react",
         "title": "React.js",
-        "category": "FRONTEND FRAMEWORK",
+        "category": "FRONTEND",
         "description": "Component-based UI library powering fast, dynamic single-page apps with Virtual DOM and a massive ecosystem.",
         "icon_key": "frontend",
         "enabled": True,
@@ -90,7 +123,7 @@ DEFAULT_TECH_STACK_CARDS = [
     {
         "_id": "tech-nextjs",
         "title": "Next.js",
-        "category": "FRONTEND FRAMEWORK",
+        "category": "FRONTEND",
         "description": "Full-stack React framework with SSR, SSG, App Router, and edge-optimized rendering for SEO-heavy production web apps.",
         "icon_key": "frontend",
         "enabled": True,
@@ -98,7 +131,7 @@ DEFAULT_TECH_STACK_CARDS = [
     {
         "_id": "tech-angular",
         "title": "Angular",
-        "category": "FRONTEND FRAMEWORK",
+        "category": "FRONTEND",
         "description": "Complete MVC, TypeScript-native enterprise framework by Google for large-scale, rigid, structured applications.",
         "icon_key": "frontend",
         "enabled": True,
@@ -106,7 +139,7 @@ DEFAULT_TECH_STACK_CARDS = [
     {
         "_id": "tech-vuejs",
         "title": "Vue.js",
-        "category": "FRONTEND FRAMEWORK",
+        "category": "FRONTEND",
         "description": "Progressive reactive framework with an approachable Composition API and excellent performance for modern SPAs.",
         "icon_key": "frontend",
         "enabled": True,
@@ -114,7 +147,7 @@ DEFAULT_TECH_STACK_CARDS = [
     {
         "_id": "tech-svelte",
         "title": "Svelte",
-        "category": "FRONTEND FRAMEWORK",
+        "category": "FRONTEND",
         "description": "Compiler-first framework that ships zero-runtime JavaScript, producing ultra-fast lightweight web interfaces.",
         "icon_key": "frontend",
         "enabled": True,
@@ -122,32 +155,65 @@ DEFAULT_TECH_STACK_CARDS = [
     {
         "_id": "tech-typescript",
         "title": "TypeScript",
-        "category": "FRONTEND FRAMEWORK",
+        "category": "FRONTEND",
         "description": "Typed superset of JavaScript enabling large-scale codebases with autocompletion, refactoring, and compile-time safety.",
         "icon_key": "frontend",
         "enabled": True,
     },
     {
-        "_id": "tech-tailwind",
-        "title": "Tailwind CSS",
-        "category": "FRONTEND FRAMEWORK",
-        "description": "Utility-first CSS framework enabling rapid UI development with consistent design tokens and responsive layouts.",
-        "icon_key": "design",
-        "enabled": True,
-    },
-    {
         "_id": "tech-vite",
         "title": "Vite",
-        "category": "FRONTEND FRAMEWORK",
+        "category": "FRONTEND",
         "description": "Lightning-fast build tool using native ESM and Rollup, delivering sub-second HMR for modern frontend projects.",
         "icon_key": "devops",
         "enabled": True,
     },
-    # ── BACKEND FRAMEWORKS ────────────────────────────────────────────────
+    # ── APP ────────────────────────────────────────────────────────────────
+    {
+        "_id": "tech-react-native",
+        "title": "React Native",
+        "category": "APP",
+        "description": "Best for JavaScript/Web Teams (Meta). Uses real platform-native components instead of a WebView, giving an authentic native feel. Extremely mature with Fabric architecture and widespread Expo adoption.",
+        "icon_key": "mobile",
+        "enabled": True,
+    },
+    {
+        "_id": "tech-flutter",
+        "title": "Flutter",
+        "category": "APP",
+        "description": "Best for Canvas Performance & Visual Fidelity (Google). Written in Dart, Flutter renders every pixel via the Impeller engine — bypassing native UI for exact cross-platform consistency and near-native speeds.",
+        "icon_key": "mobile",
+        "enabled": True,
+    },
+    {
+        "_id": "tech-kotlin",
+        "title": "Kotlin Multiplatform",
+        "category": "APP",
+        "description": "Best for Shared Logic with Native UI (JetBrains). Share business logic across iOS and Android while keeping platform-specific native UI for full native experience.",
+        "icon_key": "mobile",
+        "enabled": True,
+    },
+    {
+        "_id": "tech-swift",
+        "title": "Swift (iOS)",
+        "category": "APP",
+        "description": "Apple's fast, safe language for building high-performance native iOS, macOS, and iPadOS applications with full access to Apple platform APIs.",
+        "icon_key": "mobile",
+        "enabled": True,
+    },
+    {
+        "_id": "tech-java",
+        "title": "Java (Android)",
+        "category": "APP",
+        "description": "Mature JVM language for Android development with a broad library ecosystem, enterprise-grade stability, and full Android SDK compatibility.",
+        "icon_key": "mobile",
+        "enabled": True,
+    },
+    # ── BACKEND ────────────────────────────────────────────────────────────
     {
         "_id": "tech-nodejs",
         "title": "Node.js",
-        "category": "BACKEND FRAMEWORK",
+        "category": "BACKEND",
         "description": "Event-driven JavaScript runtime on V8 enabling high-concurrency APIs and microservices with non-blocking I/O.",
         "icon_key": "backend",
         "enabled": True,
@@ -155,7 +221,7 @@ DEFAULT_TECH_STACK_CARDS = [
     {
         "_id": "tech-nestjs",
         "title": "NestJS",
-        "category": "BACKEND FRAMEWORK",
+        "category": "BACKEND",
         "description": "Scalable TypeScript Node framework with Angular-inspired modules, decorators, and built-in DI for enterprise APIs.",
         "icon_key": "backend",
         "enabled": True,
@@ -163,7 +229,7 @@ DEFAULT_TECH_STACK_CARDS = [
     {
         "_id": "tech-express",
         "title": "Express.js",
-        "category": "BACKEND FRAMEWORK",
+        "category": "BACKEND",
         "description": "Minimal and flexible Node.js framework for building RESTful APIs and middleware-driven server applications.",
         "icon_key": "backend",
         "enabled": True,
@@ -171,7 +237,7 @@ DEFAULT_TECH_STACK_CARDS = [
     {
         "_id": "tech-fastapi",
         "title": "FastAPI",
-        "category": "BACKEND FRAMEWORK",
+        "category": "BACKEND",
         "description": "High-performance Python async framework with auto OpenAPI docs, Pydantic validation, and blazing-fast I/O.",
         "icon_key": "backend",
         "enabled": True,
@@ -179,7 +245,7 @@ DEFAULT_TECH_STACK_CARDS = [
     {
         "_id": "tech-django",
         "title": "Django",
-        "category": "BACKEND FRAMEWORK",
+        "category": "BACKEND",
         "description": "Batteries-included Python framework with ORM, admin panel, and security-first design for rapid backend delivery.",
         "icon_key": "backend",
         "enabled": True,
@@ -187,7 +253,7 @@ DEFAULT_TECH_STACK_CARDS = [
     {
         "_id": "tech-spring-boot",
         "title": "Spring Boot",
-        "category": "BACKEND FRAMEWORK",
+        "category": "BACKEND",
         "description": "Java enterprise framework with auto-configuration, embedded servers, and production-ready microservice support.",
         "icon_key": "backend",
         "enabled": True,
@@ -195,7 +261,7 @@ DEFAULT_TECH_STACK_CARDS = [
     {
         "_id": "tech-laravel",
         "title": "Laravel",
-        "category": "BACKEND FRAMEWORK",
+        "category": "BACKEND",
         "description": "Elegant PHP framework with expressive ORM, queue management, real-time broadcasting, and developer-first tooling.",
         "icon_key": "backend",
         "enabled": True,
@@ -203,56 +269,16 @@ DEFAULT_TECH_STACK_CARDS = [
     {
         "_id": "tech-go-gin",
         "title": "Go / Gin",
-        "category": "BACKEND FRAMEWORK",
+        "category": "BACKEND",
         "description": "Statically compiled high-throughput HTTP framework in Go for building ultra-low-latency microservices and APIs.",
         "icon_key": "backend",
         "enabled": True,
     },
-    {
-        "_id": "tech-react-native",
-        "title": "React Native",
-        "category": "MOBILE FRAMEWORK",
-        "description": "Best for JavaScript/Web Teams (Meta). Uses real platform-native components under the hood instead of a WebView, giving an authentic native feel. Extremely mature with the updated Fabric architecture and widespread Expo adoption.",
-        "icon_key": "mobile",
-        "enabled": True,
-    },
-    {
-        "_id": "tech-flutter",
-        "title": "Flutter",
-        "category": "MOBILE FRAMEWORK",
-        "description": "Best for Canvas Performance & Visual Fidelity (Google). Written in Dart, Flutter renders every pixel itself via the Impeller graphics engine — bypassing native UI components for exact cross-platform consistency and near-native speeds.",
-        "icon_key": "mobile",
-        "enabled": True,
-    },
-    {
-        "_id": "tech-kotlin",
-        "title": "Kotlin Multiplatform",
-        "category": "MOBILE FRAMEWORK",
-        "description": "Best for Shared Logic with Native UI (JetBrains). Share business logic across iOS and Android while keeping platform-specific native UI, combining the best of cross-platform efficiency with full native experience.",
-        "icon_key": "mobile",
-        "enabled": True,
-    },
-    {
-        "_id": "tech-swift",
-        "title": "Swift (iOS)",
-        "category": "MOBILE FRAMEWORK",
-        "description": "Apple's fast, safe, and expressive language for building high-performance native iOS, macOS, and iPadOS applications with full access to Apple platform APIs.",
-        "icon_key": "mobile",
-        "enabled": True,
-    },
-    {
-        "_id": "tech-java",
-        "title": "Java (Android)",
-        "category": "MOBILE FRAMEWORK",
-        "description": "Mature JVM language for Android development with a broad library ecosystem, enterprise-grade stability, and full backward compatibility with the Android SDK.",
-        "icon_key": "mobile",
-        "enabled": True,
-    },
-    # ── DEPLOYMENT & CLOUD ────────────────────────────────────────────────
+    # ── DEPLOYMENT ─────────────────────────────────────────────────────────
     {
         "_id": "tech-docker",
         "title": "Docker",
-        "category": "DEPLOYMENT & CLOUD",
+        "category": "DEPLOYMENT",
         "description": "Containerization platform for packaging applications with all dependencies into portable, reproducible environments.",
         "icon_key": "orchestration",
         "enabled": True,
@@ -260,7 +286,7 @@ DEFAULT_TECH_STACK_CARDS = [
     {
         "_id": "tech-kubernetes",
         "title": "Kubernetes",
-        "category": "DEPLOYMENT & CLOUD",
+        "category": "DEPLOYMENT",
         "description": "Production-grade container orchestration with auto-scaling, self-healing, and zero-downtime rolling deployments.",
         "icon_key": "orchestration",
         "enabled": True,
@@ -268,7 +294,7 @@ DEFAULT_TECH_STACK_CARDS = [
     {
         "_id": "tech-aws",
         "title": "AWS",
-        "category": "DEPLOYMENT & CLOUD",
+        "category": "DEPLOYMENT",
         "description": "World's leading cloud platform with 200+ services for compute, storage, AI, and global-scale infrastructure.",
         "icon_key": "cloud",
         "enabled": True,
@@ -276,7 +302,7 @@ DEFAULT_TECH_STACK_CARDS = [
     {
         "_id": "tech-gcp",
         "title": "Google Cloud",
-        "category": "DEPLOYMENT & CLOUD",
+        "category": "DEPLOYMENT",
         "description": "Google's cloud platform with first-class AI/ML tooling, BigQuery analytics, and globally distributed compute nodes.",
         "icon_key": "cloud",
         "enabled": True,
@@ -284,7 +310,7 @@ DEFAULT_TECH_STACK_CARDS = [
     {
         "_id": "tech-vercel",
         "title": "Vercel",
-        "category": "DEPLOYMENT & CLOUD",
+        "category": "DEPLOYMENT",
         "description": "Frontend cloud platform with edge functions, preview deployments, and zero-config Next.js hosting at scale.",
         "icon_key": "cloud",
         "enabled": True,
@@ -292,61 +318,12 @@ DEFAULT_TECH_STACK_CARDS = [
     {
         "_id": "tech-github-actions",
         "title": "GitHub Actions",
-        "category": "DEPLOYMENT & CLOUD",
+        "category": "DEPLOYMENT",
         "description": "CI/CD automation integrated in GitHub — test, build, and deploy on every push with reusable workflows.",
         "icon_key": "devops",
         "enabled": True,
     },
 ]
-
-DEFAULT_APP_WEBSITE_CARDS = [
-    {"_id": "web-product-builds", "title": "Product websites", "category": "Website", "description": "High-performance marketing sites and product surfaces that make complex technology easy to understand and use.", "icon": "WEB", "link": "#app-websites", "enabled": True},
-    {"_id": "web-client-portals", "title": "Client portals", "category": "App", "description": "Secure, responsive workspaces that bring customers, data, and operational workflows into one clear experience.", "icon": "UX", "link": "#app-websites", "enabled": True},
-    {"_id": "web-saas-platforms", "title": "SaaS platforms", "category": "App", "description": "Scalable application foundations with thoughtful onboarding, dashboards, permissions, and billing-ready architecture.", "icon": "APP", "link": "#app-websites", "enabled": True},
-]
-
-
-DEFAULT_AI_SOLUTION_CARDS = [
-    {"_id": "ai-agents", "title": "AI agents", "category": "AI Solution", "description": "Goal-oriented agents that reason across tools, knowledge, and business rules to move work forward autonomously.", "icon": "AG", "link": "#ai-solutions", "enabled": True},
-    {"_id": "ai-knowledge", "title": "Knowledge systems", "category": "AI Solution", "description": "Grounded search and retrieval systems that turn company knowledge into fast, trusted answers and actions.", "icon": "KN", "link": "#ai-solutions", "enabled": True},
-    {"_id": "ai-automation", "title": "Intelligent automation", "category": "AI Solution", "description": "Connected workflows that remove repetitive work while keeping people in control of important decisions.", "icon": "AU", "link": "#ai-solutions", "enabled": True},
-]
-
-DEFAULT_TECH_STACK_CARDS = [
-    {
-        "_id": "stack-card-1",
-        "title": "PyTorch & TensorFlow",
-        "category": "DEEP LEARNING PLATFORMS",
-        "description": "Custom neural kernels, transformer backbones, and specialized gradient optimization paths.",
-        "icon_key": "growth",
-        "enabled": True,
-    },
-    {
-        "_id": "stack-card-2",
-        "title": "NVIDIA H100 Tensor Core",
-        "category": "ACCELERATED HARDWARE",
-        "description": "Distributed matrix computation pipelines with sub-millisecond node-to-node transfer speeds.",
-        "icon_key": "hardware",
-        "enabled": True,
-    },
-    {
-        "_id": "stack-card-3",
-        "title": "Kubernetes & Docker",
-        "category": "ORCHESTRATION & CONTAINERIZATION",
-        "description": "Dynamic pod autoscaling, zero-downtime rolling updates, and fully isolated model container runtime envs.",
-        "icon_key": "orchestration",
-        "enabled": True,
-    },
-    {
-        "_id": "stack-card-4",
-        "title": "Next.js & React Server Components",
-        "category": "FRONTEND COMPILATION FRAMEWORKS",
-        "description": "Statically prerendered enterprise interfaces, lightning-fast edge streaming, and type-safe backend schemas.",
-        "icon_key": "frontend",
-        "enabled": True,
-    },
-]
-
 DEFAULT_TECH_STACK_SETTINGS = {
     "_id": "technology_stack",
     "section_title": "Our Technology Stack",
