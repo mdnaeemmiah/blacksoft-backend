@@ -6,7 +6,4 @@ venv/
 .mypy_cache/
 .env
 .env.*
-.git/
-.dockerignore
-Dockerfile
 *.log
