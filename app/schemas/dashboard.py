@@ -141,6 +141,8 @@ class TeamMemberBase(BaseModel):
     logo: str = Field(default="", max_length=500)
     bio: str = Field(default="", max_length=1000)
     link: str = Field(default="", max_length=500)
+    linkedin: str = Field(default="", max_length=500)
+    github: str = Field(default="", max_length=500)
     enabled: bool = True
 
     model_config = ConfigDict(populate_by_name=True)
@@ -158,6 +160,8 @@ class TeamMemberUpdate(BaseModel):
     logo: str | None = Field(default=None, max_length=500)
     bio: str | None = Field(default=None, max_length=1000)
     link: str | None = Field(default=None, max_length=500)
+    linkedin: str | None = Field(default=None, max_length=500)
+    github: str | None = Field(default=None, max_length=500)
     enabled: bool | None = None
 
     model_config = ConfigDict(populate_by_name=True)
