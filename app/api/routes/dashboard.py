@@ -137,7 +137,18 @@ async def upsert_settings_document(collection_name: str, document_id: str, paylo
         next_document = dict(existing)
 
     # Allow empty strings through — only skip fields where the value is explicitly None
-    next_document.update({key: value for key, value in payload.items() if value is not None})
+    for key, value in payload.items():
+        if value is not None:
+            next_document[key] = value
+            # Remove conflicting key variations to avoid duplicate fields in MongoDB
+            import re
+            snake_key = re.sub(r'(?<!^)(?=[A-Z])', '_', key).lower()
+            if snake_key != key:
+                next_document.pop(snake_key, None)
+            camel_key = "".join(word.capitalize() if i > 0 else word for i, word in enumerate(key.split("_")))
+            if camel_key != key:
+                next_document.pop(camel_key, None)
+
     next_document["_id"] = document_id
 
     await collection.replace_one({"_id": document_id}, next_document, upsert=True)
