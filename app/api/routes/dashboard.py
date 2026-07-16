@@ -32,6 +32,8 @@ from app.schemas.dashboard import (
     WhoWeAreSettingsUpdate,
     StatsSettingsResponse,
     StatsSettingsUpdate,
+    ContactInfoSettingsResponse,
+    ContactInfoSettingsUpdate,
 )
 
 router = APIRouter(
@@ -444,3 +446,32 @@ async def update_stats_settings(payload: StatsSettingsUpdate):
         },
     )
 
+@router.get("/contact-info", response_model=ContactInfoSettingsResponse)
+async def get_contact_info():
+    return await get_settings_document(
+        "contact_info_settings",
+        "contact_info",
+        {
+            "_id": "contact_info",
+            "location": "",
+            "email": "",
+            "phone": "",
+            "privacyPolicy": "",
+        },
+    )
+
+
+@admin_router.put("/contact-info", response_model=ContactInfoSettingsResponse)
+async def update_contact_info(payload: ContactInfoSettingsUpdate):
+    return await upsert_settings_document(
+        "contact_info_settings",
+        "contact_info",
+        payload.model_dump(by_alias=True, exclude_none=True),
+        {
+            "_id": "contact_info",
+            "location": "",
+            "email": "",
+            "phone": "",
+            "privacyPolicy": "",
+        },
+    )

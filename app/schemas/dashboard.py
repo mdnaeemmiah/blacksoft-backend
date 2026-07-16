@@ -275,3 +275,27 @@ class StatsSettingsResponse(StatsSettingsBase):
     model_config = ConfigDict(populate_by_name=True)
 
 
+# ─── Contact Info Settings ────────────────────────────────────────────────────
+
+class ContactInfoSettingsBase(BaseModel):
+    location: str = Field(default="", max_length=300)
+    email: str = Field(default="", max_length=200)
+    phone: str = Field(default="", max_length=80)
+    privacy_policy: str = Field(default="", alias="privacyPolicy", max_length=20000)
+
+    model_config = ConfigDict(populate_by_name=True)
+
+
+class ContactInfoSettingsUpdate(BaseModel):
+    location: str | None = Field(default=None, max_length=300)
+    email: str | None = Field(default=None, max_length=200)
+    phone: str | None = Field(default=None, max_length=80)
+    privacy_policy: str | None = Field(default=None, alias="privacyPolicy", max_length=20000)
+
+    model_config = ConfigDict(populate_by_name=True)
+
+
+class ContactInfoSettingsResponse(ContactInfoSettingsBase):
+    id: str
+
+    model_config = ConfigDict(populate_by_name=True)
