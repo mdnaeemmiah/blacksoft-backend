@@ -432,7 +432,7 @@ async def update_stats_settings(payload: StatsSettingsUpdate):
     return await upsert_settings_document(
         "stats_settings",
         "stats",
-        payload.model_dump(),
+        payload.model_dump(by_alias=True, exclude_none=True),
         {
             "_id": "stats",
             "stat1Value": "",
