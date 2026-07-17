@@ -44,6 +44,22 @@ docker build -t mishiai-backend .
 docker run --env-file .env -p 8000:8000 mishiai-backend
 ```
 
+## Vercel
+
+Vercel deploys the FastAPI application through `api/index.py`. Set the
+following **Production** environment variables in the Vercel project before
+deploying:
+
+- `APP_ENV=production`
+- `MONGODB_URI` and `MONGODB_DB`
+- `ALLOWED_ORIGINS` with the deployed frontend and dashboard URLs, separated by commas
+- `ADMIN_EMAIL`, `ADMIN_PASSWORD`, and a random `JWT_SECRET` of at least 32 characters
+- `SMTP_HOST`, `SMTP_PORT`, `SMTP_USERNAME`, `SMTP_PASSWORD`, `SMTP_FROM`, and `SMTP_USE_TLS`
+- `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`, and `CLOUDINARY_FOLDER` when image uploads are enabled
+
+The MongoDB Atlas network access list must allow Vercel to connect. After
+configuring the variables, redeploy and check `GET /api/health`.
+
 ## API
 
 - `GET /api/health`
