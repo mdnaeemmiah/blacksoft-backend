@@ -30,6 +30,10 @@ from app.schemas.dashboard import (
     TechnologyStackSettingsUpdate,
     WhoWeAreSettingsResponse,
     WhoWeAreSettingsUpdate,
+    StatsSettingsResponse,
+    StatsSettingsUpdate,
+    ContactInfoSettingsResponse,
+    ContactInfoSettingsUpdate,
 )
 
 router = APIRouter(
@@ -132,7 +136,19 @@ async def upsert_settings_document(collection_name: str, document_id: str, paylo
     else:
         next_document = dict(existing)
 
-    next_document.update({key: value for key, value in payload.items() if value is not None})
+    # Allow empty strings through — only skip fields where the value is explicitly None
+    for key, value in payload.items():
+        if value is not None:
+            next_document[key] = value
+            # Remove conflicting key variations to avoid duplicate fields in MongoDB
+            import re
+            snake_key = re.sub(r'(?<!^)(?=[A-Z])', '_', key).lower()
+            if snake_key != key:
+                next_document.pop(snake_key, None)
+            camel_key = "".join(word.capitalize() if i > 0 else word for i, word in enumerate(key.split("_")))
+            if camel_key != key:
+                next_document.pop(camel_key, None)
+
     next_document["_id"] = document_id
 
     await collection.replace_one({"_id": document_id}, next_document, upsert=True)
@@ -398,5 +414,76 @@ async def update_who_we_are_settings(payload: WhoWeAreSettingsUpdate):
             "highlight2Label": "SLA System Availability",
             "highlight3Num": "24/7",
             "highlight3Label": "Continuous Optimization",
+        },
+    )
+
+
+@router.get("/stats/settings", response_model=StatsSettingsResponse)
+async def get_stats_settings():
+    return await get_settings_document(
+        "stats_settings",
+        "stats",
+        {
+            "_id": "stats",
+            "stat1Value": "",
+            "stat1Label": "",
+            "stat1Description": "",
+            "stat2Value": "",
+            "stat2Label": "",
+            "stat2Description": "",
+            "stat3Value": "",
+            "stat3Label": "",
+            "stat3Description": "",
+        },
+    )
+
+
+@admin_router.put("/stats/settings", response_model=StatsSettingsResponse)
+async def update_stats_settings(payload: StatsSettingsUpdate):
+    return await upsert_settings_document(
+        "stats_settings",
+        "stats",
+        payload.model_dump(by_alias=True, exclude_none=True),
+        {
+            "_id": "stats",
+            "stat1Value": "",
+            "stat1Label": "",
+            "stat1Description": "",
+            "stat2Value": "",
+            "stat2Label": "",
+            "stat2Description": "",
+            "stat3Value": "",
+            "stat3Label": "",
+            "stat3Description": "",
+        },
+    )
+
+@router.get("/contact-info", response_model=ContactInfoSettingsResponse)
+async def get_contact_info():
+    return await get_settings_document(
+        "contact_info_settings",
+        "contact_info",
+        {
+            "_id": "contact_info",
+            "location": "",
+            "email": "",
+            "phone": "",
+            "privacyPolicy": "",
+        },
+    )
+
+
+@admin_router.put("/contact-info", response_model=ContactInfoSettingsResponse)
+async def update_contact_info(payload: ContactInfoSettingsUpdate):
+    return await upsert_settings_document(
+        "contact_info_settings",
+        "contact_info",
+        payload.model_dump(by_alias=True, exclude_none=True),
+        {
+            "_id": "contact_info",
+            "location": "",
+            "email": "",
+            "phone": "",
+            "privacyPolicy": "",
         },
     )

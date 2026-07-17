@@ -5,7 +5,7 @@ from app.db.mongodb import get_db
 from app.models.common import as_object_id, stringify_object_id
 from app.core.security import require_dashboard_user
 from app.schemas.service import ServiceCreate, ServiceResponse, ServiceUpdate
-from app.schemas.dashboard import WhoWeAreSettingsResponse
+from app.schemas.dashboard import WhoWeAreSettingsResponse, StatsSettingsResponse, ContactInfoSettingsResponse
 
 router = APIRouter(prefix="/services", tags=["Services"])
 
@@ -87,4 +87,46 @@ async def get_public_who_we_are_settings():
         }
     doc = dict(document)
     doc["id"] = str(doc.pop("_id"))
+    return doc
+
+
+@router.get("/stats/settings", response_model=StatsSettingsResponse)
+async def get_public_stats_settings():
+    db = get_db()
+    document = await db.stats_settings.find_one({"_id": "stats"})
+    if document is None:
+        return {
+            "id": "stats",
+            "stat1Value": "",
+            "stat1Label": "",
+            "stat1Description": "",
+            "stat2Value": "",
+            "stat2Label": "",
+            "stat2Description": "",
+            "stat3Value": "",
+            "stat3Label": "",
+            "stat3Description": "",
+        }
+    doc = dict(document)
+    doc["id"] = str(doc.pop("_id"))
+    return doc
+
+
+@router.get("/contact-info", response_model=ContactInfoSettingsResponse)
+async def get_public_contact_info():
+    db = get_db()
+    document = await db.contact_info_settings.find_one({"_id": "contact_info"})
+    if document is None:
+        return {
+            "id": "contact_info",
+            "location": "",
+            "email": "",
+            "phone": "",
+            "privacyPolicy": "",
+        }
+    doc = dict(document)
+    doc["id"] = str(doc.pop("_id"))
+    # normalize camelCase alias
+    if "privacy_policy" in doc and "privacyPolicy" not in doc:
+        doc["privacyPolicy"] = doc.pop("privacy_policy")
     return doc

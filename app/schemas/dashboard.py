@@ -39,7 +39,11 @@ class SolutionCardBase(BaseModel):
     category: str = Field(default="App", max_length=120)
     icon: str = Field(default="AI", max_length=40)
     link: str = Field(default="#solutions", max_length=250)
+    image_src: str = Field(default="", alias="imageSrc", max_length=500)
+    image_alt: str = Field(default="", alias="imageAlt", max_length=200)
     enabled: bool = True
+
+    model_config = ConfigDict(populate_by_name=True)
 
 
 class AppWebsiteCardCreate(SolutionCardBase):
@@ -52,7 +56,11 @@ class AppWebsiteCardUpdate(BaseModel):
     category: str | None = Field(default=None, max_length=120)
     icon: str | None = Field(default=None, max_length=40)
     link: str | None = Field(default=None, max_length=250)
+    image_src: str | None = Field(default=None, alias="imageSrc", max_length=500)
+    image_alt: str | None = Field(default=None, alias="imageAlt", max_length=200)
     enabled: bool | None = None
+
+    model_config = ConfigDict(populate_by_name=True)
 
 
 class AppWebsiteCardResponse(SolutionCardBase):
@@ -76,6 +84,8 @@ class TechnologyStackCardBase(BaseModel):
     category: str = Field(min_length=1, max_length=120)
     description: str = Field(min_length=1, max_length=1000)
     icon_key: str = Field(default="growth", alias="iconKey", max_length=40)
+    image_src: str = Field(default="", alias="imageSrc", max_length=500)
+    image_alt: str = Field(default="", alias="imageAlt", max_length=200)
     enabled: bool = True
 
     model_config = ConfigDict(populate_by_name=True)
@@ -90,6 +100,8 @@ class TechnologyStackCardUpdate(BaseModel):
     category: str | None = Field(default=None, min_length=1, max_length=120)
     description: str | None = Field(default=None, min_length=1, max_length=1000)
     icon_key: str | None = Field(default=None, alias="iconKey", max_length=40)
+    image_src: str | None = Field(default=None, alias="imageSrc", max_length=500)
+    image_alt: str | None = Field(default=None, alias="imageAlt", max_length=200)
     enabled: bool | None = None
 
     model_config = ConfigDict(populate_by_name=True)
@@ -129,6 +141,8 @@ class TeamMemberBase(BaseModel):
     logo: str = Field(default="", max_length=500)
     bio: str = Field(default="", max_length=1000)
     link: str = Field(default="", max_length=500)
+    linkedin: str = Field(default="", max_length=500)
+    github: str = Field(default="", max_length=500)
     enabled: bool = True
 
     model_config = ConfigDict(populate_by_name=True)
@@ -146,6 +160,8 @@ class TeamMemberUpdate(BaseModel):
     logo: str | None = Field(default=None, max_length=500)
     bio: str | None = Field(default=None, max_length=1000)
     link: str | None = Field(default=None, max_length=500)
+    linkedin: str | None = Field(default=None, max_length=500)
+    github: str | None = Field(default=None, max_length=500)
     enabled: bool | None = None
 
     model_config = ConfigDict(populate_by_name=True)
@@ -220,3 +236,66 @@ class WhoWeAreSettingsResponse(WhoWeAreSettingsBase):
 
     model_config = ConfigDict(populate_by_name=True)
 
+
+class StatsSettingsBase(BaseModel):
+    stat1_value: str = Field(default="", max_length=50, alias="stat1Value")
+    stat1_label: str = Field(default="", max_length=120, alias="stat1Label")
+    stat1_description: str = Field(default="", max_length=500, alias="stat1Description")
+
+    stat2_value: str = Field(default="", max_length=50, alias="stat2Value")
+    stat2_label: str = Field(default="", max_length=120, alias="stat2Label")
+    stat2_description: str = Field(default="", max_length=500, alias="stat2Description")
+
+    stat3_value: str = Field(default="", max_length=50, alias="stat3Value")
+    stat3_label: str = Field(default="", max_length=120, alias="stat3Label")
+    stat3_description: str = Field(default="", max_length=500, alias="stat3Description")
+
+    model_config = ConfigDict(populate_by_name=True)
+
+
+class StatsSettingsUpdate(BaseModel):
+    stat1_value: str | None = Field(default=None, max_length=50, alias="stat1Value")
+    stat1_label: str | None = Field(default=None, max_length=120, alias="stat1Label")
+    stat1_description: str | None = Field(default=None, max_length=500, alias="stat1Description")
+
+    stat2_value: str | None = Field(default=None, max_length=50, alias="stat2Value")
+    stat2_label: str | None = Field(default=None, max_length=120, alias="stat2Label")
+    stat2_description: str | None = Field(default=None, max_length=500, alias="stat2Description")
+
+    stat3_value: str | None = Field(default=None, max_length=50, alias="stat3Value")
+    stat3_label: str | None = Field(default=None, max_length=120, alias="stat3Label")
+    stat3_description: str | None = Field(default=None, max_length=500, alias="stat3Description")
+
+    model_config = ConfigDict(populate_by_name=True)
+
+
+class StatsSettingsResponse(StatsSettingsBase):
+    id: str
+
+    model_config = ConfigDict(populate_by_name=True)
+
+
+# ─── Contact Info Settings ────────────────────────────────────────────────────
+
+class ContactInfoSettingsBase(BaseModel):
+    location: str = Field(default="", max_length=300)
+    email: str = Field(default="", max_length=200)
+    phone: str = Field(default="", max_length=80)
+    privacy_policy: str = Field(default="", alias="privacyPolicy", max_length=20000)
+
+    model_config = ConfigDict(populate_by_name=True)
+
+
+class ContactInfoSettingsUpdate(BaseModel):
+    location: str | None = Field(default=None, max_length=300)
+    email: str | None = Field(default=None, max_length=200)
+    phone: str | None = Field(default=None, max_length=80)
+    privacy_policy: str | None = Field(default=None, alias="privacyPolicy", max_length=20000)
+
+    model_config = ConfigDict(populate_by_name=True)
+
+
+class ContactInfoSettingsResponse(ContactInfoSettingsBase):
+    id: str
+
+    model_config = ConfigDict(populate_by_name=True)

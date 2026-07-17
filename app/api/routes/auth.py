@@ -19,19 +19,15 @@ from app.services.auth_service import create_code_challenge, hash_code, send_ema
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
 
-@router.post("/login", response_model=LoginChallengeResponse)
+@router.post("/login", response_model=TokenResponse)
 async def login(payload: LoginRequest):
     email = str(payload.email).lower()
     user = await get_db().users.find_one({"_id": email, "active": True})
     if user is None or not verify_password(payload.password, user.get("password_hash", "")):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid email or password")
 
-    try:
-        challenge_id, code = await create_code_challenge(email, "login")
-        await send_email("mdmiskatulmasabi278@gmail.com", "Your Blacksoft dashboard verification code", f"Your verification code is {code}. It expires soon.")
-    except RuntimeError as exc:
-        raise HTTPException(status_code=503, detail=str(exc)) from exc
-    return LoginChallengeResponse(challenge_id=challenge_id, expires_in=get_settings().verification_code_minutes * 60)
+    token, expires_in = create_access_token(email, user.get("role", "admin"))
+    return TokenResponse(access_token=token, expires_in=expires_in)
 
 
 @router.post("/verify-login", response_model=TokenResponse)
@@ -61,7 +57,7 @@ async def forgot_password(payload: ForgotPasswordRequest):
         try:
             _, code = await create_code_challenge(email, "password_reset")
             await send_email(email, "Reset your Blacksoft dashboard password", f"Your password reset code is {code}. It expires soon.")
-        except RuntimeError:
+        except Exception:
             pass
     return {"message": "If the account exists, a reset code has been sent."}
 
