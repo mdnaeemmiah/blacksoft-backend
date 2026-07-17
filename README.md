@@ -58,7 +58,10 @@ deploying:
 - `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`, and `CLOUDINARY_FOLDER` when image uploads are enabled
 
 The MongoDB Atlas network access list must allow Vercel to connect. After
-configuring the variables, redeploy and check `GET /api/health`.
+configuring the variables, redeploy and check `GET /api/health`. Dashboard
+account creation and content seeding are intentionally not run during Vercel
+function startup; run them as an explicit administrative task rather than on
+every serverless cold start.
 
 ## API
 

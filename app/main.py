@@ -12,8 +12,6 @@ from app.api.routes.why_us import router as why_us_router
 from app.core.config import get_settings
 from app.db.mongodb import close_mongo_connection, connect_to_mongo
 from app.services.cloudinary_service import configure_cloudinary
-from app.services.dashboard_seed import seed_dashboard_content
-from app.services.auth_service import create_admin_user, validate_auth_settings
 
 settings = get_settings()
 
@@ -30,11 +28,8 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def on_startup() -> None:
-    validate_auth_settings()
     await connect_to_mongo()
-    await create_admin_user()
     configure_cloudinary()
-    await seed_dashboard_content()
 
 
 @app.on_event("shutdown")
