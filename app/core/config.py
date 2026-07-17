@@ -14,7 +14,10 @@ class Settings(BaseSettings):
     app_name: str = Field(default="MishiAi Backend", alias="APP_NAME")
     app_env: str = Field(default="development", alias="APP_ENV")
     api_prefix: str = Field(default="/api", alias="API_PREFIX")
-    allowed_origins: str = Field(default="http://localhost:3000", alias="ALLOWED_ORIGINS")
+    allowed_origins: str = Field(
+        default="http://localhost:3000,https://blacksoft.site,https://admin.blacksoft.site",
+        alias="ALLOWED_ORIGINS",
+    )
 
     mongodb_uri: str = Field(default="mongodb://localhost:27017", alias="MONGODB_URI")
     mongodb_db: str = Field(default="mishiai", alias="MONGODB_DB")
