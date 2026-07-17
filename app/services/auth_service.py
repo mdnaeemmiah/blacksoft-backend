@@ -64,21 +64,25 @@ async def send_email(to_email: str, subject: str, body: str) -> None:
 
 async def create_admin_user() -> None:
     settings = get_settings()
-    if not settings.admin_email or not settings.admin_password:
+    if not settings.admin_emails or not settings.admin_password:
         return
 
-    email = settings.admin_email.strip().lower()
     users = get_db().users
-    existing = await users.find_one({"_id": email})
-    if existing is None:
-        await users.insert_one({
-            "_id": email,
-            "email": email,
-            "password_hash": hash_password(settings.admin_password),
-            "role": "admin",
-            "active": True,
-            "created_at": utc_now(),
-        })
+    configured_password_hash = hash_password(settings.admin_password)
+    for email in settings.admin_emails:
+        await users.update_one(
+            {"_id": email},
+            {
+                "$set": {
+                    "email": email,
+                    "password_hash": configured_password_hash,
+                    "role": "admin",
+                    "active": True,
+                },
+                "$setOnInsert": {"created_at": utc_now()},
+            },
+            upsert=True,
+        )
 
 
 async def create_code_challenge(email: str, purpose: str) -> tuple[str, str]:

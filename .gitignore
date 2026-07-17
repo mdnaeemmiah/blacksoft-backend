@@ -10,3 +10,5 @@ venv/
 .dockerignore
 Dockerfile
 *.log
+
+.vercel

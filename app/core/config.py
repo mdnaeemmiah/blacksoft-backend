@@ -43,6 +43,10 @@ class Settings(BaseSettings):
     def cors_origins(self) -> list[str]:
         return [origin.strip() for origin in self.allowed_origins.split(",") if origin.strip()]
 
+    @property
+    def admin_emails(self) -> list[str]:
+        return [email.strip().lower() for email in self.admin_email.split(",") if email.strip()]
+
 
 @lru_cache
 def get_settings() -> Settings:
