@@ -33,6 +33,14 @@ class EcommerceCardResponse(EcommerceCardBase):
     model_config = ConfigDict(populate_by_name=True)
 
 
+class OtherLink(BaseModel):
+    title: str = Field(min_length=1, max_length=120)
+    description: str = Field(default="", max_length=1000)
+    url: str = Field(min_length=1, max_length=500)
+
+    model_config = ConfigDict(populate_by_name=True)
+
+
 class SolutionCardBase(BaseModel):
     title: str = Field(min_length=1, max_length=120)
     description: str = Field(min_length=1, max_length=1000)
@@ -42,6 +50,7 @@ class SolutionCardBase(BaseModel):
     image_src: str = Field(default="", alias="imageSrc", max_length=500)
     image_alt: str = Field(default="", alias="imageAlt", max_length=200)
     enabled: bool = True
+    other_links: list[OtherLink] = Field(default_factory=list, alias="otherLinks")
 
     model_config = ConfigDict(populate_by_name=True)
 
@@ -59,6 +68,7 @@ class AppWebsiteCardUpdate(BaseModel):
     image_src: str | None = Field(default=None, alias="imageSrc", max_length=500)
     image_alt: str | None = Field(default=None, alias="imageAlt", max_length=200)
     enabled: bool | None = None
+    other_links: list[OtherLink] | None = Field(default=None, alias="otherLinks")
 
     model_config = ConfigDict(populate_by_name=True)
 
